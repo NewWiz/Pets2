@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.Commands
 {
+    // Error handling for invalid commands
     internal class InvalidCommand : ICommand
     {
         public void Execute()

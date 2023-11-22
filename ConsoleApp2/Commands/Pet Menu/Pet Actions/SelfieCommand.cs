@@ -1,25 +1,26 @@
 ﻿using ConsoleApp2.Abstract;
-using ConsoleApp2.Pets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ConsoleApp2.Commands
 {
-    internal class CuddleCommand : ICommand
+    // class to implement the selfie command
+    internal class SelfieCommand : ICommand
     {
         private Pet _pet;
 
-        public CuddleCommand(Pet pet)
+        public SelfieCommand(Pet pet)
         {
             _pet = pet;
         }
 
         public void Execute()
         {
-            _pet.Cuddle();
+            _pet.Selfie();
         }
     }
 }

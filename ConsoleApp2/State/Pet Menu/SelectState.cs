@@ -1,6 +1,5 @@
 ﻿using ConsoleApp2.Abstract;
 using ConsoleApp2.Commands;
-using ConsoleApp2.Pets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.State
 {
+    // State for selecting a pet
     internal class SelectState : IState
     {
         private StateManager _manager;
@@ -16,6 +16,7 @@ namespace ConsoleApp2.State
         private List<Pet> _pets;
         private Pet _pet;
 
+        // Takes in the manager, last state, and list of pets
         public SelectState(StateManager manager, IState lastState, List<Pet> pets)
         {
             _manager = manager;
@@ -41,9 +42,18 @@ namespace ConsoleApp2.State
             }
             else
             {
+                // Instantiates the Select Command with the input name of pet to find and the pets list
                 var sc = new SelectCommand(input, _pets);
-                _pet = sc.GetPet();
-                return new SwitchStateCommand(_manager, new PetActionMenuState(_manager, _pets, _pet));
+                if (sc.GetPet() != null)
+                {
+                    // Returns a pet from the name entered in the input
+                    _pet = sc.GetPet();
+                    return new SwitchStateCommand(_manager, new PetActionMenuState(_manager, this, _pets, _pet));
+                }
+                else
+                {
+                    return new InvalidPetCommand();
+                }
             }
         }
     }

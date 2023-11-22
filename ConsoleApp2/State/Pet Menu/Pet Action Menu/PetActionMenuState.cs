@@ -1,6 +1,5 @@
 ﻿using ConsoleApp2.Abstract;
 using ConsoleApp2.Commands;
-using ConsoleApp2.Pets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +8,18 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.State
 {
+    // This is the menu to perform certain actions on your selected pet
     internal class PetActionMenuState : IState
     {
         private StateManager _manager;
+        private IState _lastState;
         private List<Pet> _pets;
         private Pet _pet;
 
-        public PetActionMenuState(StateManager manager, List<Pet> pets, Pet pet)
+        public PetActionMenuState(StateManager manager, IState lastState, List<Pet> pets, Pet pet)
         {
             _manager = manager;
+            _lastState = lastState;
             _pets = pets;
             _pet = pet;
         }
@@ -29,10 +31,11 @@ namespace ConsoleApp2.State
             Console.WriteLine("[cuddle] - cuddle pet -");
             Console.WriteLine("[selfie] - snap a pic -");
             Console.WriteLine("[groom] - brush pet ---");
-            Console.WriteLine("[back] - pet menu -----");
+            Console.WriteLine("[back] - select pet ---");
             Console.WriteLine("-----------------------");
         }
 
+        // Takes the command then performs the function overridden from the Pet abstract class
         public ICommand GetCommand()
         {
             var input = Console.ReadLine();
@@ -53,7 +56,8 @@ namespace ConsoleApp2.State
             }
             else if (input == "back")
             {
-                return new SwitchStateCommand(_manager, new PetMenuState(_manager, _pets));
+                // Return to the pet menu
+                return new SwitchStateCommand(_manager, _lastState);
             }
             else
             {

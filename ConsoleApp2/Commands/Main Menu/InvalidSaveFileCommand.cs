@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.Commands
 {
-    internal class PetActionMenuCommand : ICommand
+    internal class InvalidSaveFileCommand : ICommand
     {
         public void Execute()
         {
-            Console.WriteLine("<3 <3 <3 <3 <3 <3");
+            Console.WriteLine("You must select a file first");
         }
     }
 }

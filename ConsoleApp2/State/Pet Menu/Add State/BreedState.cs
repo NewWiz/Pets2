@@ -1,6 +1,5 @@
 ﻿using ConsoleApp2.Abstract;
 using ConsoleApp2.Commands;
-using ConsoleApp2.Pets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +9,16 @@ using System.Xml;
 
 namespace ConsoleApp2.State
 {
+    // State for adding the breed of the pet
     internal class BreedState : IState
     {
         private StateManager _manager;
-        private IState _lastState;
         private List<Pet> _pets;
         private Pet _pet;
 
-        public BreedState(StateManager stateManager, IState lastState, List<Pet> pets, Pet pet)
+        public BreedState(StateManager manager, IState lastState, List<Pet> pets, Pet pet)
         {
-            _manager = stateManager;
-            _lastState = lastState;
+            _manager = manager;
             _pets = pets;
             _pet = pet;
         }
@@ -45,6 +43,7 @@ namespace ConsoleApp2.State
             {
                 if (input != null)
                 {
+                    // Inputs the breed of the pet then inputs it into the Pet list then returns to the add state
                     _pet.Breed = input;
                     _pets.Add(_pet);
                     return new SwitchStateCommand(_manager, new AddState(_manager, _pets));

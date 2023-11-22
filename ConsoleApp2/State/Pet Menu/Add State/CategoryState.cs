@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.State
 {
+    // State for choosing dog, cat, or bird
     internal class CategoryState : IState
     {
         private StateManager _manager;
@@ -33,6 +34,7 @@ namespace ConsoleApp2.State
             Console.WriteLine("-------------------");
         }
 
+        // Instantiates a new dog, cat, or bird then assigns the category and gets passed into the next state
         public ICommand GetCommand()
         {
             var input = Console.ReadLine();

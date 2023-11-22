@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.Abstract
 {
+    // An interface class for all the commands
     internal interface ICommand
     {
         void Execute();

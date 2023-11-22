@@ -1,6 +1,5 @@
 ﻿using ConsoleApp2.Abstract;
 using ConsoleApp2.Commands;
-using ConsoleApp2.Pets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.State
 {
+    // Save State, all states inherit from IState
     internal class SaveState : IState
     {
-        private StateManager _stateManager;
+        private StateManager _manager;
         private IState _lastState;
         private List<Pet> _pets;
 
-        public SaveState(StateManager stateManager, IState lastState, List<Pet> pets)
+        // Takes in the list of pets to save
+        public SaveState(StateManager manager, IState lastState, List<Pet> pets)
         {
-            _stateManager = stateManager;
+            _manager = manager;
             _lastState = lastState;
             _pets = pets;
         }
@@ -38,10 +39,12 @@ namespace ConsoleApp2.State
             {
                 if (input == "back")
                 {
-                    return new SwitchStateCommand(_stateManager, _lastState, _pets);
+                    // Switches state passing in the current manager and the last state
+                    return new SwitchStateCommand(_manager, _lastState);
                 }
                 else
                 {
+                    // Instantiates a new save command with the pets list and the input being the file name to save
                     return new SaveCommand(_pets, input);
                 }
 

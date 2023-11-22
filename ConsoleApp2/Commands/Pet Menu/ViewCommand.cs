@@ -1,5 +1,4 @@
 ﻿using ConsoleApp2.Abstract;
-using ConsoleApp2.Pets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.Commands
 {
+    // Command that executes the state to 
     internal class ViewCommand : ICommand
     {
         private List<Pet> _pets;

@@ -8,26 +8,16 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2.Commands
 {
+    // The command that manages switching between states
     internal class SwitchStateCommand : ICommand
     {
         private StateManager _manager;
         private IState _newState;
-        private List<Pet> _pets;
-        private Pet _pet;
-
-        public SwitchStateCommand() { }
 
         public SwitchStateCommand(StateManager manager, IState newState)
         {
             _manager = manager;
             _newState = newState;
-        }
-
-        public SwitchStateCommand(StateManager manager, IState newState, List<Pet> pets)
-        {
-            _manager = manager;
-            _newState = newState;
-            _pets = pets;
         }
 
         public void Execute()
